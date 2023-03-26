@@ -18,13 +18,36 @@ namespace Register.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        [Route("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] long id)
         {
             var user = new GetUserRequest(id);
 
             var result = await _mediator.Send(user).ToActionResult();
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(AddUserRequest request)
+        {
+            var result = await _mediator.Send(request).ToActionResult();
+
+            return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(UpdateUserRequest request)
+        {
+            var result = await _mediator.Send(request).ToActionResult();
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(DeleteUserRequest request)
+        {
+            var result = await _mediator.Send(request);
 
             return Ok(result);
         }
