@@ -8,12 +8,14 @@ public class User : Entity
     (
         string name,
         string email,
-        string cpf
+        string cpf,
+        long addressId
     )
     {
         Name = name;
         Email = email;
         Cpf = cpf;
+        AddressId = addressId;
         CreatedAt = DateTime.Now;
     }
 
@@ -24,6 +26,8 @@ public class User : Entity
     public string Email { get; private set; }
 
     public string Cpf { get; private set; }
+
+    public long AddressId { get; private set; }
 
     public DateTime CreatedAt { get; private set; }
 

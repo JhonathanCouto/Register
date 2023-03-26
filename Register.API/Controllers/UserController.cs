@@ -36,7 +36,7 @@ namespace Register.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{Id:long}")]
         public async Task<IActionResult> Put(UpdateUserRequest request)
         {
             var result = await _mediator.Send(request).ToActionResult();
@@ -44,10 +44,11 @@ namespace Register.API.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(DeleteUserRequest request)
+        [HttpDelete("{id:long}")]
+        public async Task<IActionResult> Delete(long id)
         {
-            var result = await _mediator.Send(request);
+
+            var result = await _mediator.Send(new DeleteUserRequest(id));
 
             return Ok(result);
         }

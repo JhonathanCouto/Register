@@ -20,6 +20,8 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(entity => entity.Cpf).HasMaxLength(11).IsFixedLength().IsRequired();
 
+        builder.Property(entity => entity.AddressId).IsRequired();
+
         builder.Property(entity => entity.CreatedAt).IsRequired();
     }
 }

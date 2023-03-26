@@ -24,7 +24,7 @@ public sealed class AddUserHandler : IRequestHandler<AddUserRequest, Result<long
     {
         if (await _userRepository.EmailExistsAsync(request.Email)) return Result.Fail<long>("Email already exists");
 
-        var user = new User(request.Name, request.Email, request.Cpf);
+        var user = new User(request.Name, request.Email, request.Cpf, request.AddressId);
 
         await _userRepository.AddAsync(user);
 

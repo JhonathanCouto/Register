@@ -28,7 +28,7 @@ public sealed class UpdateUserHandler : IRequestHandler<UpdateUserRequest, Resul
     {
         var user = await _userRepository.GetByIdAsync(request.Id);
 
-        if (user == null) return Result.Ok();
+        if (user == null) return Result.Fail("Id can't be null");
 
         user.UpdateName(request.Name);
 
