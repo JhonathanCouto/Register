@@ -1,11 +1,5 @@
-﻿using FluentResults;
-using MediatR;
+﻿using MediatR;
 using Register.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Register.Application;
 
@@ -16,7 +10,7 @@ public sealed class UpdateUserHandler : IRequestHandler<UpdateUserRequest, Resul
 
     public UpdateUserHandler
     (
-        IUserRepository userRepository, 
+        IUserRepository userRepository,
         IUnitOfWork unitOfWork
     )
     {
@@ -26,20 +20,20 @@ public sealed class UpdateUserHandler : IRequestHandler<UpdateUserRequest, Resul
 
     public async Task<Result> Handle(UpdateUserRequest request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetByIdAsync(request.Id);
+        var user = await _userRepository.GetAsync(request.Id);
 
-        if (user == null) return Result.Fail("Id can't be null");
+        if (user == null) return Result.Success();
 
         user.UpdateName(request.Name);
 
         user.UpdateEmail(request.Email);
 
-        user.UpdateCpf(request.Cpf);    
+        user.UpdateCpf(request.Cpf);
 
         await _userRepository.UpdateAsync(user);
 
         await _unitOfWork.SaveChangesAsync();
 
-        return Result.Ok();
+        return Result.Success();
     }
 }

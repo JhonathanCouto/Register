@@ -12,4 +12,3 @@ public sealed class UpdateUserRequestValidator : AbstractValidator<UpdateUserReq
         RuleFor(request => request.Cpf).Cpf();
     }
 }
-

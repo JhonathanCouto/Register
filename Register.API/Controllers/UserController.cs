@@ -1,5 +1,4 @@
-﻿using FluentResults.Extensions.AspNetCore;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Register.Application;
 
 namespace Register.API.Controllers
@@ -13,7 +12,7 @@ namespace Register.API.Controllers
         {
             var users = new ListUserRequest();
 
-            var result = await _mediator.Send(users).ToActionResult();
+            var result = await _mediator.Send(users);
 
             return Ok(result);
         }
@@ -23,7 +22,7 @@ namespace Register.API.Controllers
         {
             var user = new GetUserRequest(id);
 
-            var result = await _mediator.Send(user).ToActionResult();
+            var result = await _mediator.Send(user);
 
             return Ok(result);
         }
@@ -31,20 +30,20 @@ namespace Register.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(AddUserRequest request)
         {
-            var result = await _mediator.Send(request).ToActionResult();
+            var result = await _mediator.Send(request);
 
             return Ok(result);
         }
 
-        [HttpPut("{Id:long}")]
+        [HttpPut("{Id}")]
         public async Task<IActionResult> Put(UpdateUserRequest request)
         {
-            var result = await _mediator.Send(request).ToActionResult();
+            var result = await _mediator.Send(request);
 
             return Ok(result);
         }
 
-        [HttpDelete("{id:long}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(long id)
         {
 

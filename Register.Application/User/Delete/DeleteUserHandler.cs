@@ -1,5 +1,4 @@
-﻿using FluentResults;
-using MediatR;
+﻿using MediatR;
 using Register.Infrastructure;
 
 namespace Register.Application;
@@ -11,7 +10,7 @@ public sealed class DeleteUserHandler : IRequestHandler<DeleteUserRequest, Resul
 
     public DeleteUserHandler
     (
-        IUserRepository userRepository, 
+        IUserRepository userRepository,
         IUnitOfWork unitOfWork
     )
     {
@@ -25,6 +24,6 @@ public sealed class DeleteUserHandler : IRequestHandler<DeleteUserRequest, Resul
 
         await _unitOfWork.SaveChangesAsync();
 
-        return Result.Ok();
+        return Result.Success();
     }
 }

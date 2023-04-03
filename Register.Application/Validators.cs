@@ -11,5 +11,4 @@ public static class Validators
     public static IRuleBuilderOptions<T, string> Email<T>(this IRuleBuilder<T, string> builder) => builder.NotEmpty().EmailAddress();
 
     public static IRuleBuilderOptions<T, string> Cpf<T>(this IRuleBuilder<T, string> builder) => builder.NotEmpty().Length(11);
-
 }

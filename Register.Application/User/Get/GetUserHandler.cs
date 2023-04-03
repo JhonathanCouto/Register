@@ -1,5 +1,4 @@
-﻿using FluentResults;
-using MediatR;
+﻿using MediatR;
 using Register.Domain;
 using Register.Infrastructure;
 
@@ -13,9 +12,8 @@ public sealed class GetUserHandler : IRequestHandler<GetUserRequest, Result<User
 
     public async Task<Result<User>> Handle(GetUserRequest request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetByIdAsync(request.Id);
+        var user = await _userRepository.GetAsync(request.Id);
 
-        return Result.Ok(user);
-
+        return Result<User>.Success(user);
     }
 }

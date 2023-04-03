@@ -1,5 +1,4 @@
-﻿using FluentResults;
-using MediatR;
+﻿using MediatR;
 using Register.Domain;
 using Register.Infrastructure;
 
@@ -15,6 +14,6 @@ public sealed class ListUserHandler : IRequestHandler<ListUserRequest, Result<IE
     {
         var users = await _userRepository.ListAsync();
 
-        return Result.Ok(users);
+        return Result<IEnumerable<User>>.Success(users);
     }
 }

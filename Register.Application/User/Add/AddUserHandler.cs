@@ -1,5 +1,4 @@
-﻿using FluentResults;
-using MediatR;
+﻿using MediatR;
 using Register.Domain;
 using Register.Infrastructure;
 
@@ -12,7 +11,7 @@ public sealed class AddUserHandler : IRequestHandler<AddUserRequest, Result<long
 
     public AddUserHandler
     (
-        IUserRepository userRepository, 
+        IUserRepository userRepository,
         IUnitOfWork unitOfWork
     )
     {
@@ -22,14 +21,14 @@ public sealed class AddUserHandler : IRequestHandler<AddUserRequest, Result<long
 
     public async Task<Result<long>> Handle(AddUserRequest request, CancellationToken cancellationToken)
     {
-        if (await _userRepository.EmailExistsAsync(request.Email)) return Result.Fail<long>("Email already exists");
+        if (await _userRepository.EmailExistsAsync(request.Email)) return Result<long>.Error("Email already exists");
 
-        var user = new User(request.Name, request.Email, request.Cpf, request.AddressId);
+        var user = new User(request.Name, request.Email, request.Cpf);
 
         await _userRepository.AddAsync(user);
 
         await _unitOfWork.SaveChangesAsync();
 
-        return Result.Ok(user.Id);
+        return Result<long>.Success(user.Id);
     }
 }

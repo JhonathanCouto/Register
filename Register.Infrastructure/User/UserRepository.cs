@@ -3,7 +3,7 @@ using Register.Domain;
 
 namespace Register.Infrastructure;
 
-public sealed class UserRepository : EfRepository<User>, IUserRepository
+public sealed class UserRepository : EFRepository<User>, IUserRepository
 {
     public UserRepository(Context context) : base(context) { }
 
